@@ -1,0 +1,2 @@
+import {useState} from 'react';
+export function ProjectImage({src,name,index=1,onClick}:{src?:string;name:string;index?:number;onClick?:()=>void}){const [bad,setBad]=useState(false);if(!src||bad)return <div className="project-placeholder" aria-label={`${name} preview placeholder`}><small>PROJECT PREVIEW / 0{index}</small><strong>{name}</strong><div className="mock-ui"><i/><i/><i/><b/></div></div>;return <button className="project-image" onClick={onClick}><img src={src} alt={`${name} screenshot ${index}`} loading="lazy" onError={()=>setBad(true)}/></button>}

@@ -1,0 +1,1 @@
+const text='GOOGLE SHEETS • APPS SCRIPT • AUTOMATION • SYSTEMS • WORKFLOWS • DATA • AI • REACT • OPERATIONS • ';export const TechMarquee=()=> <div className="marquee"><div>{text.repeat(3)}</div></div>;
