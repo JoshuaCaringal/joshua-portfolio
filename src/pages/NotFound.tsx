@@ -1,0 +1,1 @@
+import {Link} from 'react-router-dom';export default function NotFound(){return <main className="notfound"><small>404 / REQUEST FAILED / ROUTE DOES NOT EXIST</small><h1>SYSTEM<br/><span>NOT FOUND</span></h1><Link to="/">RETURN HOME →</Link></main>}
