@@ -1,1 +1,1 @@
-const text='GOOGLE SHEETS • APPS SCRIPT • AUTOMATION • SYSTEMS • WORKFLOWS • DATA • AI • REACT • OPERATIONS • ';export const TechMarquee=()=> <div className="marquee"><div>{text.repeat(3)}</div></div>;
+const text='PROJECTS  •  WEB DEVELOPMENT  •  AUTOMATION  •  SYSTEMS  •  UI DEVELOPMENT  •  ';export const TechMarquee=()=> <div className="marquee" aria-label="Development disciplines"><div>{text.repeat(4)}</div></div>;
