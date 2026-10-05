@@ -1,1 +1,1 @@
-export const profile={name:'Carina',role:'Systems & Automation Builder',email:'',linkedin:'',github:'https://github.com/JoshuaCaringal',resumeUrl:''};
+export const profile={name:'Joshua Caringal',role:'Software Developer & Systems Builder',email:'',linkedin:'',github:'https://github.com/JoshuaCaringal',resumeUrl:''};
