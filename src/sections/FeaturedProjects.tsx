@@ -6,24 +6,4 @@ import {SectionLabel} from '../components/common/SectionLabel';
 import {TechBadge} from '../components/common/TechBadge';
 import {Reveal} from '../components/animation/Reveal';
 
-export function FeaturedProjects() {
-  const project = projects[0];
-  return <section id="projects" className="featured-work"><Container>
-    <SectionLabel>02 / FEATURED PROJECT</SectionLabel>
-    <div className="section-heading"><h2>REAL WORK.<br/>REAL SYSTEM SCREENS.</h2><p>A focused look at a working budget and expense platform developed for PUP Ragay Branch.</p></div>
-    <Reveal className="featured-card">
-      <Link className="featured-visual" to={`/projects/${project.slug}`} aria-label={`Explore ${project.title}`}>
-        <div className="browser-bar"><span/><span/><span/><small>LIVE SYSTEM / DASHBOARD</small></div>
-        <img src={project.cover} alt={`${project.title} dashboard`} loading="eager"/>
-        <span className="image-count">01 / {String(project.images.length).padStart(2, '0')} REAL SCREENS</span>
-      </Link>
-      <div className="featured-copy">
-        <small>01 / {project.category}</small>
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <div className="project-tools">{project.tools.map(tool => <TechBadge key={tool}>{tool}</TechBadge>)}</div>
-        <Link className="explore-link" to={`/projects/${project.slug}`}>VIEW PROJECT <ArrowUpRight size={18}/></Link>
-      </div>
-    </Reveal>
-  </Container></section>;
-}
+export function FeaturedProjects() { return <section id="projects" className="featured-work"><Container><SectionLabel>PROJECTS</SectionLabel><div className="section-heading"><h2>PROJECTS BUILT<br/>FOR REAL WORK.</h2><p>Web applications and automations presented with screenshots from the working projects.</p></div><div className="projects-grid">{projects.map((project,index)=><Reveal className="project-card" key={project.slug}><Link className="project-visual" to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>{project.cover ? <img src={project.cover} alt={`${project.title} interface`} loading={index<2?'eager':'lazy'}/> : <div className="media-unavailable">Project screenshots are not included in this checkout.</div>}<span>{String(project.images.length).padStart(2,'0')} SCREENS</span></Link><div className="project-copy"><small>{project.category}</small><h3>{project.title}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map(tool=><TechBadge key={tool}>{tool}</TechBadge>)}</div><Link to={`/projects/${project.slug}`}>VIEW PROJECT <ArrowUpRight size={18}/></Link></div></Reveal>)}</div></Container></section>; }
