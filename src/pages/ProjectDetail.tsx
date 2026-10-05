@@ -1,2 +1,48 @@
-import {useEffect,useState} from 'react';import {Link,useParams} from 'react-router-dom';import {ArrowLeft} from 'lucide-react';import {projects} from '../data/projects';import {ProjectImage} from '../components/common/ProjectImage';import {TechBadge} from '../components/common/TechBadge';import {ImageViewer} from '../components/project/ImageViewer';import {Container} from '../components/common/Container';
-export default function ProjectDetail(){const {slug}=useParams();const p=projects.find(x=>x.slug===slug);const [viewer,setViewer]=useState<number|null>(null);useEffect(()=>{document.title=p?`${p.title} | Carina`:'Project | Carina';scrollTo(0,0);return()=>{document.title='Carina | Systems & Automation'}},[p]);if(!p)return <div/>;const gallery=p.images.length?p.images:[undefined,undefined,undefined];return <main className="case"><Container><Link to="/" className="back"><ArrowLeft/> BACK TO SYSTEMS</Link><header><small>PROJECT 0{p.id} / {p.category}</small><h1>{p.title}</h1><p>{p.description}</p></header><ProjectImage src={p.images[0]} name={p.title}/><div className="case-grid"><section><small>01 / OVERVIEW</small><h2>Built for a clearer operation.</h2><p>{p.overview}</p></section><section><small>02 / PROBLEM</small><h2>Disconnected work creates friction.</h2><p>{p.problem}</p></section><section><small>03 / SOLUTION</small><h2>One structured workflow.</h2><p>{p.solution}</p></section><section><small>04 / OUTCOME</small><h2>Information that is easier to use.</h2><p>A focused system that supports consistent capture, organized records, and a clearer view of daily work.</p></section></div><section className="case-features"><div><small>FEATURES</small>{p.features.map(x=><h3>{x}</h3>)}</div><div><small>TOOLS</small>{p.tools.map(x=><TechBadge>{x}</TechBadge>)}</div></section><section><small>SCREENSHOT GALLERY</small><h2>Inside the system.</h2><div className="gallery">{gallery.map((src,i)=><ProjectImage src={src} name={p.title} index={i+1} onClick={src?()=>setViewer(i):undefined}/>)}</div></section></Container>{viewer!==null&&p.images.length>0&&<ImageViewer images={p.images} index={viewer} setIndex={setViewer} onClose={()=>setViewer(null)}/>}</main>}
+import {useEffect, useState} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import {ArrowLeft, ChevronLeft, ChevronRight, Expand} from 'lucide-react';
+import {AnimatePresence, motion} from 'framer-motion';
+import {projects} from '../data/projects';
+import {TechBadge} from '../components/common/TechBadge';
+import {ImageViewer} from '../components/project/ImageViewer';
+import {Container} from '../components/common/Container';
+
+export default function ProjectDetail() {
+  const {slug} = useParams();
+  const project = projects.find(item => item.slug === slug);
+  const [active, setActive] = useState(0);
+  const [viewer, setViewer] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.title = project ? `${project.title} | Joshua Caringal` : 'Project | Joshua Caringal';
+    scrollTo(0, 0);
+    return () => { document.title = 'Joshua Caringal | Software Developer'; };
+  }, [project]);
+
+  if (!project) return <main className="notfound"><h1>Project not found.</h1><Link to="/">Return home</Link></main>;
+  const previous = () => setActive(current => (current - 1 + project.images.length) % project.images.length);
+  const next = () => setActive(current => (current + 1) % project.images.length);
+
+  return <main className="case"><Container>
+    <Link to="/#projects" className="back"><ArrowLeft size={15}/> BACK TO WORK</Link>
+    <header className="case-header"><div><small>CASE STUDY / 01</small><h1>{project.title}</h1></div><p>{project.overview}</p></header>
+    <div className="case-cover"><div className="browser-bar"><span/><span/><span/><small>PROJECT SYSTEM / OVERVIEW</small></div><img src={project.cover} alt={`${project.title} overview`}/></div>
+
+    <div className="case-grid">
+      <section><small>01 / CONTEXT</small><h2>Clearer budget operations.</h2><p>{project.problem}</p></section>
+      <section><small>02 / APPROACH</small><h2>A connected workflow.</h2><p>{project.solution}</p></section>
+    </div>
+
+    <section className="case-features"><div><small>CORE CAPABILITIES</small><h2>Designed around the work.</h2></div><div className="feature-list">{project.features.map((feature, index) => <div key={feature}><span>{String(index + 1).padStart(2, '0')}</span><h3>{feature}</h3></div>)}</div></section>
+
+    <section className="gallery-section" aria-label="Project screenshot gallery">
+      <div className="gallery-heading"><div><small>SCREENSHOT GALLERY</small><h2>Inside the system.</h2></div><p>Explore all {project.images.length} real system screens. Select a thumbnail or use the controls to move through the gallery.</p></div>
+      <div className="active-shot">
+        <AnimatePresence mode="wait"><motion.button key={project.images[active]} onClick={() => setViewer(active)} initial={{opacity: 0, x: 16, scale: .99}} animate={{opacity: 1, x: 0, scale: 1}} exit={{opacity: 0, x: -16, scale: .99}} transition={{duration: .22}} aria-label={`Expand screenshot ${active + 1}`}><img src={project.images[active]} alt={`${project.title} screenshot ${active + 1} of ${project.images.length}`}/><span><Expand size={16}/> EXPAND IMAGE</span></motion.button></AnimatePresence>
+      </div>
+      <div className="gallery-controls"><div><button onClick={previous} aria-label="Previous screenshot"><ChevronLeft/></button><button onClick={next} aria-label="Next screenshot"><ChevronRight/></button></div><strong>{String(active + 1).padStart(2, '0')} <span>/ {String(project.images.length).padStart(2, '0')}</span></strong></div>
+      <div className="thumb-strip">{project.images.map((image, index) => <button key={image} className={active === index ? 'active' : ''} onClick={() => setActive(index)} aria-label={`Show screenshot ${index + 1}`} aria-current={active === index ? 'true' : undefined}><img src={image} alt="" loading="lazy"/><span>{String(index + 1).padStart(2, '0')}</span></button>)}</div>
+      <div className="category-row"><small>PROJECT CATEGORIES</small>{project.tools.map(tool => <TechBadge key={tool}>{tool}</TechBadge>)}</div>
+    </section>
+  </Container>{viewer !== null && <ImageViewer images={project.images} index={viewer} setIndex={setViewer} onClose={() => setViewer(null)}/>}</main>;
+}
