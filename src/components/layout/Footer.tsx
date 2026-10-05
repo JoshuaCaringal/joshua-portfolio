@@ -1,1 +1,1 @@
-export const Footer=()=> <footer><span>CARINA<span className="red">.</span></span><small>© {new Date().getFullYear()} / SYSTEMS BUILT WITH INTENT</small><a href="#top">BACK TO TOP ↑</a></footer>;
+import {profile} from '../../data/profile';export const Footer=()=> <footer><span>{profile.name}</span><small>© {new Date().getFullYear()} / BUILT WITH REACT + TYPESCRIPT</small><div><a href={profile.github}>GITHUB ↗</a><a href="#top">BACK TO TOP ↑</a></div></footer>;
