@@ -1,0 +1,1 @@
+import {motion} from 'framer-motion'; import type {ReactNode} from 'react'; export const Reveal=({children,className=''}:{children:ReactNode,className?:string})=><motion.div className={className} initial={{opacity:0,y:32}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:'-10%'}} transition={{duration:.7,ease:[.2,.8,.2,1]}}>{children}</motion.div>;
