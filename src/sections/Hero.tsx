@@ -3,7 +3,7 @@ import type {MouseEvent} from 'react';
 import {Container} from '../components/common/Container';
 import {Button} from '../components/common/Button';
 import {profile} from '../data/profile';
-import profileImage from '../Profile.png';
+import profileImage from '../Profile.jpg';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const roles = ['System Administrator', 'Junior Web Developer', 'AI Automation Designer'];
@@ -21,9 +21,11 @@ export function Hero() {
         <motion.p initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.78}}>I build practical systems, web applications, and automation workflows that simplify repetitive processes and improve everyday operations.</motion.p>
         <motion.div className="actions" initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{delay:.88}}><Button href="#projects">VIEW PROJECT</Button><a className="text-link" href={profile.github}>GITHUB <span>↗</span></a></motion.div>
       </div>
-      <motion.div className="portrait-wrap" initial={{opacity:0,x:45,y:16,scale:.94}} animate={{opacity:1,x:0,y:0,scale:1}} transition={{duration:.8,delay:.32,ease}} style={{x,y}}>
-        <div className="outline-word" aria-hidden="true">DEVELOPER</div><i className="corner top"/><i className="corner bottom"/>
-        <figure><img src={profileImage} alt="Joshua Caringal"/><figcaption><span>PROFILE / 2026</span><b>SYSTEMS · WEB · AUTOMATION</b></figcaption></figure>
+      <motion.div className="portrait-wrap" initial={{opacity:0,y:28,scale:.92}} animate={{opacity:1,y:0,scale:1}} transition={{duration:.9,delay:.32,ease}} style={{x,y}}>
+        <span className="portrait-accent accent-one" aria-hidden="true"/><span className="portrait-accent accent-two" aria-hidden="true"/><span className="portrait-accent accent-three" aria-hidden="true"/>
+        <motion.figure animate={{y:[0,-8,0]}} transition={{duration:5.5,repeat:Infinity,ease:'easeInOut'}} whileHover={{y:-10,scale:1.018}}>
+          <img src={profileImage} alt="Joshua Caringal"/>
+        </motion.figure>
       </motion.div>
     </Container><div className="hero-foot"><span>SCROLL TO EXPLORE</span><i/><b>PROFILE / 01</b></div>
   </section>;
