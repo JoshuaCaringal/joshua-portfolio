@@ -1,0 +1,1 @@
+export function TechMarquee(){const t='GOOGLE SHEETS • APPS SCRIPT • AUTOMATION • SYSTEMS • WORKFLOWS • DATA • AI • REACT • OPERATIONS • ';return <div className="marquee"><div>{t}{t}</div></div>}

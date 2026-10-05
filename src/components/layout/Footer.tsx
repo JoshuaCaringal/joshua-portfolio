@@ -1,0 +1,1 @@
+export function Footer(){return <footer className="footer"><span>CARINA.</span><span>SYS.001 / STATUS: ONLINE</span><span>© {new Date().getFullYear()}</span></footer>}

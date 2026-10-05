@@ -1,0 +1,1 @@
+import{Link}from'react-router-dom';import{motion}from'framer-motion';export default function NotFound(){return <motion.main className="notfound" initial={{opacity:0}} animate={{opacity:1}}><div className="grid-bg"/><span>404</span><h1>SYSTEM NOT FOUND</h1><p>REQUEST FAILED / ROUTE DOES NOT EXIST</p><Link className="btn btn-red" to="/">RETURN HOME</Link></motion.main>}

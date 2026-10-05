@@ -1,0 +1,1 @@
+import{useEffect,useState}from'react';export function useReducedMotion(){const[r,s]=useState(false);useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)'),u=()=>s(m.matches);u();m.addEventListener('change',u);return()=>m.removeEventListener('change',u)},[]);return r}

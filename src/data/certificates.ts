@@ -1,0 +1,1 @@
+export interface Certificate{id:number;title:string;issuer:string;date:string;image?:string;credentialUrl?:string}export const certificates:Certificate[]=[{id:1,title:'Certificate Placeholder',issuer:'Add issuer',date:'Add date'},{id:2,title:'Certificate Placeholder',issuer:'Add issuer',date:'Add date'},{id:3,title:'Certificate Placeholder',issuer:'Add issuer',date:'Add date'}]
