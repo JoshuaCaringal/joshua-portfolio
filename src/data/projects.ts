@@ -29,6 +29,16 @@ const aetsImages = Object.entries(imageModules)
 // AETS4 is the clearest dashboard view in the supplied set, so it leads the case study.
 const dashboardCover = Object.entries(imageModules).find(([path]) => /AETS4\.png$/.test(path))?.[1] ?? aetsImages[0];
 
+const caregiverModules = import.meta.glob('../CAH*.jpg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+const caregiverNumber = (path: string) => Number(path.match(/CAH(\d+)\.jpg$/)?.[1] ?? 0);
+const caregiverImages = Object.entries(caregiverModules)
+  .sort(([a], [b]) => caregiverNumber(a) - caregiverNumber(b))
+  .map(([, url]) => url);
+
 export const projects: Project[] = [{
   id: 1,
   slug: 'automated-expense-tracking',
@@ -48,4 +58,17 @@ export const projects: Project[] = [{
   tools: ['Budget Tracking', 'Expense Monitoring', 'OCR Receipt Processing', 'Admin Dashboard', 'Student Dashboard', 'Reports', 'Notifications'],
   images: aetsImages,
   cover: dashboardCover,
+}, {
+  id: 2,
+  slug: 'caregiver-timesheet-qr-system',
+  title: 'CAREGIVER TIMESHEET QR SYSTEM',
+  category: 'ATTENDANCE / CARE',
+  description: 'A caregiver timesheet and attendance system using QR-based workflows to simplify time tracking, caregiver records, and daily attendance monitoring.',
+  overview: 'A practical web application that brings caregiver records, QR attendance, and timesheet tracking into one straightforward workflow.',
+  problem: 'Manual attendance and timesheet processes can make daily records slower to capture, review, and organize.',
+  solution: 'QR-based check-ins connect attendance records and caregiver information in a focused system designed for routine daily use.',
+  features: ['QR-based attendance', 'Timesheet tracking', 'Caregiver records', 'Daily attendance monitoring', 'Streamlined record review'],
+  tools: ['QR Attendance', 'Timesheet Tracking', 'Caregiver Management', 'Web Application', 'Workflow Automation'],
+  images: caregiverImages,
+  cover: caregiverImages[0],
 }];
