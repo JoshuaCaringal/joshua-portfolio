@@ -1,51 +1,14 @@
-export interface Project {
-  id: number;
-  slug: string;
-  title: string;
-  category: string;
-  description: string;
-  overview: string;
-  problem: string;
-  solution: string;
-  features: string[];
-  tools: string[];
-  images: string[];
-  cover: string;
-}
-
-// Vite resolves the real source assets at build time. Sorting by the number in
-// each filename means newly added AETS screenshots are picked up automatically.
-const imageModules = import.meta.glob('../AETS*.png', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-}) as Record<string, string>;
-
-const imageNumber = (path: string) => Number(path.match(/AETS(\d+)\.png$/)?.[1] ?? 0);
-const aetsImages = Object.entries(imageModules)
-  .sort(([a], [b]) => imageNumber(a) - imageNumber(b))
-  .map(([, url]) => url);
-
-// AETS4 is the clearest dashboard view in the supplied set, so it leads the case study.
-const dashboardCover = Object.entries(imageModules).find(([path]) => /AETS4\.png$/.test(path))?.[1] ?? aetsImages[0];
-
-export const projects: Project[] = [{
-  id: 1,
-  slug: 'automated-expense-tracking',
-  title: 'AUTOMATED EXPENSE TRACKING & BUDGET MONITORING SYSTEM',
-  category: 'FINANCE / EDUCATION',
-  description: 'A budget and expense management system developed for PUP Ragay Branch, featuring dashboards, expense tracking, receipt processing, reports, notifications, and role-based workflows.',
-  overview: 'The system brings budget monitoring, departmental expenses, receipt uploads, reports, notifications, student management, and administrative approvals into one focused experience.',
-  problem: 'Budget records, receipts, approvals, and student information need a clear shared workflow so teams can understand current spending and act on requests efficiently.',
-  solution: 'Role-based dashboards connect budget collection, expense monitoring, OCR-assisted receipt capture, notifications, approvals, search, and PDF reports.',
-  features: [
-    'Admin dashboard', 'Student dashboard', 'Department budget tracking',
-    'Expense monitoring', 'Budget collection management', 'Budget reports',
-    'Receipt uploads', 'OCR-assisted receipt extraction', 'Student account management',
-    'Notifications', 'Budget request approval', 'Search and filtering',
-    'PDF reporting', 'Role-based access',
-  ],
-  tools: ['Budget Tracking', 'Expense Monitoring', 'OCR Receipt Processing', 'Admin Dashboard', 'Student Dashboard', 'Reports', 'Notifications'],
-  images: aetsImages,
-  cover: dashboardCover,
-}];
+import cah1 from '../CAH1.jpg'; import cah2 from '../CAH2.jpg'; import cah3 from '../CAH3.jpg'; import cah4 from '../CAH4.jpg'; import cah5 from '../CAH5.jpg'; import cah6 from '../CAH6.jpg'; import cah7 from '../CAH7.jpg';
+import n8n1 from '../n8n1.png'; import n8n2 from '../n8n2.png'; import n8n3 from '../n8n3.png'; import n8n4 from '../n8n4.png'; import n8n5 from '../n8n5.png'; import n8n6 from '../n8n6.png';
+import el1 from '../EL1.png'; import el2 from '../EL2.png'; import el3 from '../EL3.png'; import el4 from '../EL4.png'; import el5 from '../EL5.png'; import el6 from '../EL6.jpg';
+export interface Project {id:number;slug:string;title:string;category:string;description:string;overview:string;problem:string;solution:string;features:string[];tools:string[];images:string[];cover:string}
+const modules=import.meta.glob('../AETS*.png',{eager:true,query:'?url',import:'default'}) as Record<string,string>;
+const num=(path:string)=>Number(path.match(/AETS(\d+)\.png$/)?.[1]??0);
+const aets=Object.entries(modules).sort(([a],[b])=>num(a)-num(b)).map(([,url])=>url);
+const caregiver=[cah1,cah2,cah3,cah4,cah5,cah6,cah7]; const n8n=[n8n1,n8n2,n8n3,n8n4,n8n5,n8n6]; const elearning=[el1,el2,el3,el4,el5,el6];
+export const projects:Project[]=[
+{id:1,slug:'automated-expense-tracking',title:'Automated Expense Tracking & Budget Monitoring System',category:'FINANCE / EDUCATION',description:'A budget and expense management system developed for PUP Ragay Branch, featuring dashboards, expense tracking, budget monitoring, reports, notifications, and role-based workflows.',overview:'A practical platform that brings budget monitoring, departmental expenses, receipt uploads, reporting, and approvals into one focused experience.',problem:'Budget records, receipts, approvals, and student information need a clear shared workflow.',solution:'Role-based dashboards connect budget collection, OCR-assisted receipt capture, notifications, approvals, search, and PDF reports.',features:['Admin dashboard','Student dashboard','Budget tracking','Expense monitoring','OCR receipt processing','Reports and notifications','Role-based access'],tools:['Budget Tracking','Expense Monitoring','OCR Receipt Processing','Admin Dashboard','Student Dashboard','Reports','Notifications'],images:aets,cover:Object.entries(modules).find(([p])=>/AETS4\.png$/.test(p))?.[1]??aets[0]},
+{id:2,slug:'caregiver-timesheet-qr',title:'Caregiver Timesheet QR System',category:'ATTENDANCE / OPERATIONS',description:'A caregiver attendance and timesheet system using QR-based workflows to simplify time tracking, attendance monitoring, and caregiver record management.',overview:'A QR-enabled system created to make caregiver attendance and timesheet records faster and easier to manage.',problem:'Manual attendance records take time to maintain and are difficult to review.',solution:'QR-based check-ins connect attendance, timesheets, and caregiver records in a single web workflow.',features:['QR attendance','Timesheet tracking','Caregiver records','Attendance monitoring','Responsive workflow'],tools:['QR Attendance','Timesheet Tracking','Caregiver Management','Web Application','Workflow Automation'],images:caregiver,cover:caregiver[0]},
+{id:3,slug:'n8n-workflow-automation',title:'n8n Workflow Automation',category:'AUTOMATION / INTEGRATIONS',description:'A collection of workflow automations built with n8n to streamline repetitive tasks, connect applications, and automate practical digital processes.',overview:'Connected n8n workflows that turn repetitive multi-step tasks into reliable automated processes.',problem:'Routine data movement and app handoffs consume time and invite avoidable errors.',solution:'Visual workflows connect services, route information, and trigger useful actions automatically.',features:['Visual workflows','Application integrations','Automated routing','AI-assisted steps','Repeatable processes'],tools:['n8n','Workflow Automation','Process Automation','Integrations','AI Automation'],images:n8n,cover:n8n1},
+{id:4,slug:'elearning-certification-generator',title:'eLearning with Certification Generator',category:'EDUCATION / WEB APPLICATION',description:'An eLearning web application with certification generation features designed to support digital learning, course completion, and certificate-based workflows.',overview:'A digital learning experience that connects course content, completion tracking, and certificate generation.',problem:'Learners and administrators need a simple way to manage course progress and completion credentials.',solution:'The application provides a clear learning flow with certificate-based completion built into the experience.',features:['Digital courses','Learning progress','Course completion','Certificate generation','Responsive interface'],tools:['eLearning','Certification Generator','Web Application','Education Technology','Digital Workflow'],images:elearning,cover:el1}
+];
