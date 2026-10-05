@@ -29,6 +29,28 @@ const aetsImages = Object.entries(imageModules)
 // AETS4 is the clearest dashboard view in the supplied set, so it leads the case study.
 const dashboardCover = Object.entries(imageModules).find(([path]) => /AETS4\.png$/.test(path))?.[1] ?? aetsImages[0];
 
+const caregiverModules = import.meta.glob('../CAH*.jpg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+const caregiverNumber = (path: string) => Number(path.match(/CAH(\d+)\.jpg$/)?.[1] ?? 0);
+const caregiverImages = Object.entries(caregiverModules)
+  .sort(([a], [b]) => caregiverNumber(a) - caregiverNumber(b))
+  .map(([, url]) => url);
+
+// The workflow captures are kept separate from the application screenshots and
+// use the exact lowercase n8n filenames supplied in src.
+const n8nModules = import.meta.glob('../n8n*.png', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+const n8nNumber = (path: string) => Number(path.match(/n8n(\d+)\.png$/)?.[1] ?? 0);
+const n8nImages = Object.entries(n8nModules)
+  .sort(([a], [b]) => n8nNumber(a) - n8nNumber(b))
+  .map(([, url]) => url);
+
 export const projects: Project[] = [{
   id: 1,
   slug: 'automated-expense-tracking',
@@ -48,4 +70,37 @@ export const projects: Project[] = [{
   tools: ['Budget Tracking', 'Expense Monitoring', 'OCR Receipt Processing', 'Admin Dashboard', 'Student Dashboard', 'Reports', 'Notifications'],
   images: aetsImages,
   cover: dashboardCover,
+}, {
+  id: 2,
+  slug: 'caregiver-timesheet-qr-system',
+  title: 'CAREGIVER TIMESHEET QR SYSTEM',
+  category: 'ATTENDANCE / CARE',
+  description: 'A caregiver timesheet and attendance system using QR-based workflows to simplify time tracking, caregiver records, and daily attendance monitoring.',
+  overview: 'A practical web application that brings caregiver records, QR attendance, and timesheet tracking into one straightforward workflow.',
+  problem: 'Manual attendance and timesheet processes can make daily records slower to capture, review, and organize.',
+  solution: 'QR-based check-ins connect attendance records and caregiver information in a focused system designed for routine daily use.',
+  features: ['QR-based attendance', 'Timesheet tracking', 'Caregiver records', 'Daily attendance monitoring', 'Streamlined record review'],
+  tools: ['QR Attendance', 'Timesheet Tracking', 'Caregiver Management', 'Web Application', 'Workflow Automation'],
+  images: caregiverImages,
+  cover: caregiverImages[0],
 }];
+
+const n8nProject: Project = {
+  id: 3,
+  slug: 'n8n-workflow-automation',
+  title: 'n8n WORKFLOW AUTOMATION',
+  category: 'AUTOMATION / INTEGRATIONS',
+  description: 'A collection of workflow automations built with n8n to streamline repetitive tasks, connect apps, and automate digital processes efficiently.',
+  overview: 'These workflow captures demonstrate practical automation design and process integration experience using n8n.',
+  problem: 'Repetitive handoffs and disconnected tools add unnecessary steps to otherwise straightforward digital processes.',
+  solution: 'Visual n8n workflows connect process steps and integrations so recurring tasks can run more consistently with less manual work.',
+  features: ['Visual workflow design', 'Process automation', 'Application integrations', 'Connected workflow steps', 'AI-assisted automation'],
+  tools: ['n8n', 'Workflow Automation', 'Process Automation', 'Integrations', 'AI Automation'],
+  images: n8nImages,
+  cover: n8nImages[0],
+};
+
+// This checkout may predate the newly uploaded workflow captures. Avoid a
+// broken card when assets are absent; the project is added automatically as
+// soon as the real n8n screenshots from main are present.
+if (n8nImages.length > 0) projects.push(n8nProject);

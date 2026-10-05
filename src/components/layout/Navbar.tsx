@@ -3,7 +3,7 @@ import {motion} from 'framer-motion';
 import {useEffect, useState} from 'react';
 import {profile} from '../../data/profile';
 
-const links = ['top', 'about', 'projects', 'skills', 'contact'];
+const links = ['top', 'about', 'projects', 'skills', 'certifications', 'contact'];
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
@@ -16,7 +16,7 @@ export function Navbar() {
   }, []);
   return <motion.header className="navbar" initial={{opacity: 0, y: -20}} animate={{opacity: 1, y: 0}} transition={{duration: .55, delay: .1}}>
     <a href="/" className="logo"><b>JC</b><span>{profile.name}</span></a>
-    <nav className={open ? 'open' : ''} aria-label="Main navigation">{links.map(link => <a key={link} className={active === link ? 'active' : ''} href={`/#${link}`} onClick={() => setOpen(false)}><span>0{links.indexOf(link) + 1}</span>{link === 'top' ? 'home' : link}</a>)}</nav>
+    <nav className={open ? 'open' : ''} aria-label="Main navigation">{links.map(link => <a key={link} className={active === link ? 'active' : ''} href={`/#${link}`} onClick={() => setOpen(false)}>{link === 'top' ? 'home' : link}</a>)}</nav>
     <a className="nav-cta" href="/#contact">LET'S TALK <span>↗</span></a>
     <button className="menu" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
   </motion.header>;
