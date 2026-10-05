@@ -1,1 +1,9 @@
-import {Hero} from '../sections/Hero';import {IntroStatement} from '../sections/IntroStatement';import {About} from '../sections/About';import {Skills} from '../sections/Skills';import {FeaturedProjects} from '../sections/FeaturedProjects';import {SystemFlow} from '../sections/SystemFlow';import {Process} from '../sections/Process';import {Certificates} from '../sections/Certificates';import {TechMarquee} from '../sections/TechMarquee';import {Contact} from '../sections/Contact';export default function Home(){return <main><Hero/><IntroStatement/><About/><Skills/><FeaturedProjects/><SystemFlow/><Process/><Certificates/><TechMarquee/><Contact/></main>}
+import {Hero} from '../sections/Hero';
+import {About} from '../sections/About';
+import {Skills} from '../sections/Skills';
+import {FeaturedProjects} from '../sections/FeaturedProjects';
+import {Contact} from '../sections/Contact';
+
+export default function Home(){
+  return <main><Hero/><About/><Skills/><FeaturedProjects/><Contact/></main>;
+}
