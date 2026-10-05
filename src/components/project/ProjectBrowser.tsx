@@ -1,0 +1,1 @@
+import { projects } from '../../data/projects';import { ProjectCard } from './ProjectCard';export function ProjectBrowser(){return <div className="project-browser">{projects.map((p,i)=><ProjectCard key={p.slug} project={p} active={i===0}/>)}</div>}

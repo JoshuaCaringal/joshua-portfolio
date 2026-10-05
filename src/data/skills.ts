@@ -1,0 +1,7 @@
+export interface SkillGroup { id: string; title: string; skills: string[] }
+export const skillGroups: SkillGroup[] = [
+  { id:'01', title:'SYSTEMS', skills:['Workflow Design','Process Mapping','Internal Tools','Business Systems','Data Organization','Dashboard Development'] },
+  { id:'02', title:'AUTOMATION', skills:['Google Apps Script','Workflow Automation','Trigger-Based Actions','Automated Notifications','Report Automation','Data Synchronization'] },
+  { id:'03', title:'TOOLS', skills:['Google Sheets','Google Forms','Excel','Apps Script','AI Tools','Automation Platforms'] },
+  { id:'04', title:'WEB', skills:['HTML','CSS','JavaScript','TypeScript','React','Responsive Interfaces'] },
+];

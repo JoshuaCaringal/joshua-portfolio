@@ -1,0 +1,1 @@
+import { motion } from 'framer-motion'; export function PageTransition(){return <motion.div className="page-wipe" initial={{scaleY:1}} animate={{scaleY:0}} transition={{duration:.65,ease:[.76,0,.24,1]}}/>}

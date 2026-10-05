@@ -1,0 +1,2 @@
+import { ArrowUpRight } from 'lucide-react'; import type { ReactNode } from 'react'; import { Link } from 'react-router-dom';
+export function Button({children,to,variant='primary'}:{children:ReactNode;to:string;variant?:'primary'|'outline'|'light'}){const cn=`button ${variant}`;return to.startsWith('/')||to.startsWith('#')?<Link className={cn} to={to}>{children}<ArrowUpRight size={16}/></Link>:<a className={cn} href={to} target="_blank" rel="noreferrer">{children}<ArrowUpRight size={16}/></a>}

@@ -1,0 +1,2 @@
+import { Container } from '../components/common/Container';import { SectionLabel } from '../components/common/SectionLabel';import { ProjectBrowser } from '../components/project/ProjectBrowser';
+export function FeaturedProjects(){return <section id="projects" className="section projects"><Container><SectionLabel>03 / SELECTED WORK</SectionLabel><h2 className="section-title">Systems built around<br/>real workflows.</h2><ProjectBrowser/></Container></section>}

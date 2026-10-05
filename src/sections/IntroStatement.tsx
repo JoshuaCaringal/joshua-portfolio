@@ -1,0 +1,2 @@
+import { motion,useScroll,useTransform } from 'framer-motion';import { useRef } from 'react';
+export function IntroStatement(){const ref=useRef(null);const {scrollYProgress}=useScroll({target:ref,offset:['start end','end start']});const x=useTransform(scrollYProgress,[0,1],['8%','-8%']);return <section className="intro" ref={ref}><motion.div style={{x}}><span>NOT JUST</span><strong>SPREADSHEETS.</strong><b>SYSTEMS.</b></motion.div><small>DESIGN / AUTOMATE / IMPROVE</small></section>}
