@@ -3,7 +3,7 @@ import type {MouseEvent} from 'react';
 import {Container} from '../components/common/Container';
 import {Button} from '../components/common/Button';
 import {profile} from '../data/profile';
-import profileImage from '../Profile.png';
+import profileImage from '../Profile.jpg';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const roles = ['System Administrator', 'Junior Web Developer', 'AI Automation Designer'];
